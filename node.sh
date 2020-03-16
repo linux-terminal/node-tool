@@ -178,15 +178,15 @@ function menu(){
     echo -e "\033[41;33m 请输入选项以继续，ctrl+C退出 \033[0m"
 
     read opt
-    if [opt==1]
+    if [$opt==1]
     then
         ssr
 
-    elif [opt==2]
+    elif [$opt==2]
     then
         v2ray
 
-    elif [opt==3]
+    elif [$opt==3]
     then
         brook
     
