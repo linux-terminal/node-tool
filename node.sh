@@ -17,7 +17,8 @@ function ssr(){
     echo "---------------------------------------------------------------------------"
 
 
-    if [$opt==1];then
+    if [$opt==1]
+    then
         
         echo " "
         echo -e "\033[42;37m 请输入对接域名 \033[0m 参考格式 http://sspanel.com"
@@ -52,7 +53,8 @@ function ssr(){
         echo -e "\033[42;37m 安装完成 \033[0m"
 
 
-    elif [$opt==2];then
+    elif [$opt==2]
+    then
         echo " "
         echo -e "\033[42;37m 请输入对接域名 \033[0m 参考格式 http://sspanel.com"
         read host_2
@@ -96,7 +98,8 @@ function ssr(){
 
         echo -e "\033[42;37m 安装完成 \033[0m"
 
-        else;then
+        else
+        then
         echo -e "\033[42;37m 输入错误 \033[0m"
         echo " "
         bash ./node.sh
@@ -176,18 +179,22 @@ function menu(){
     echo -e "\033[41;33m 请输入选项以继续，ctrl+C退出 \033[0m"
 
     read opt
-    if [opt==1];then
+    if [opt==1]
+    then
         ssr
 
-    elif [opt==2];then
+    elif [opt==2]
+    then
         v2ray
 
-    elif [opt==3];then
+    elif [opt==3]
+    then
         brook
     
     else
         echo -e "\033[41;33m 输入错误 \033[0m"
         bash ./node.sh
+    fi
 }
 
 menu
