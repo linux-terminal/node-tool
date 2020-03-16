@@ -164,9 +164,9 @@ function brook(){
 }
 
 function menu(){
-    echo "###       node toolv1.0      ###"
+    echo "###        node toolv1.0       ###"
     echo "###  By Twitter@Linux_Terminal ###"
-    echo "###   Update: 2020-03-16      ###"
+    echo "###    Update: 2020-03-16      ###"
     echo ""
 
     echo "---------------------------------------------------------------------------"
