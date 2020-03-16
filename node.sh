@@ -99,7 +99,6 @@ function ssr(){
         echo -e "\033[42;37m 安装完成 \033[0m"
 
         else
-        then
         echo -e "\033[42;37m 输入错误 \033[0m"
         echo " "
         bash ./node.sh
