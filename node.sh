@@ -12,14 +12,13 @@ function ssr(){
     echo "[1] docker版SSR普通版"
     echo "[2]docker版SSR后端端口偏移版"
     echo -e "\033[41;33m 输入1或2进行选择:"
+    opt=0
     read opt
     echo " "
     echo "---------------------------------------------------------------------------"
 
 
-    if [ $opt==1 ]
-    then
-        
+    if [ "$opt"x = "1"x ]; then        
         echo " "
         echo -e "\033[42;37m 请输入对接域名 \033[0m 参考格式 http://sspanel.com"
         read host_1
@@ -53,8 +52,7 @@ function ssr(){
         echo -e "\033[42;37m 安装完成 \033[0m"
 
 
-    elif [ $opt==2 ]
-    then
+    elif [ "$opt"x = "2"x ]; then
         echo " "
         echo -e "\033[42;37m 请输入对接域名 \033[0m 参考格式 http://sspanel.com"
         read host_2
@@ -109,7 +107,7 @@ function ssr(){
 function v2ray(){
     echo "###   v2ray后端一键对接脚本v1.0   ###"
     echo "###     By Linux_Terminal       ###"
-    echo "###   Update: 2020-03-16      ###"
+    echo "###     Update: 2020-03-16      ###"
 
     echo " "
     echo -e "\033[41;33m 本功能仅支持Debian 9，请勿在其他系统中运行 \033[0m"
@@ -164,9 +162,9 @@ function brook(){
 }
 
 function menu(){
-    echo "###        node toolv1.0       ###"
+    echo "###       node tool v1.3       ###"
     echo "###  By Twitter@Linux_Terminal ###"
-    echo "###    Update: 2020-03-16      ###"
+    echo "###    Update: 2020-03-17      ###"
     echo ""
 
     echo "---------------------------------------------------------------------------"
@@ -174,22 +172,22 @@ function menu(){
     echo -e "\033[42;37m [1] \033[0m 安装docker版SSR后端"
     echo -e "\033[42;37m [2] \033[0m 安装v2ray后端"
     echo -e "\033[42;37m [3] \033[0m 安装brook中转后端"
-    echo -e "\033[42;37m [3] \033[0m 安装bbr加速"
+    echo -e "\033[42;37m [4] \033[0m 安装bbr加速"
     echo -e "\033[41;33m 请输入选项以继续，ctrl+C退出 \033[0m"
 
+    opt=0
     read opt
-    if [ $opt==1 ]
-    then
+    if [ "$opt"x = "1"x ]; then
         ssr
 
-    elif [ $opt==2 ]
-    then
+    elif [ "$opt"x = "2"x ]; then
         v2ray
 
-    elif [ $opt==3 ]
-    then
+    elif [ "$opt"x = "3"x ]; then
         brook
     
+    elif [ "$opt"x = "4"x ]; then
+        bbr
     else
         echo -e "\033[41;33m 输入错误 \033[0m"
         bash ./node.sh
