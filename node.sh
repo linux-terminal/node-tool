@@ -9,9 +9,9 @@ function ssr(){
     service docker restart
 
     echo -e "\033[42;37m 选择SSR安装版本 \033[0m"
-    echo "[1] docker版SSR普通版"
-    echo "[2]docker版SSR后端端口偏移版"
-    echo -e "\033[41;33m 输入1或2进行选择:"
+    echo -e "\033[37m [1] docker版SSR普通版 \033[0m"
+    echo -e "\033[37m [2]docker版SSR后端端口偏移版 \033[0m"
+    echo -e "\033[41;33m 输入1或2进行选择: \033[0m"
     opt=0
     read opt
     echo " "
@@ -161,18 +161,136 @@ function brook(){
     wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubiBackup/doubi/master/brook-pf.sh && chmod +x brook-pf.sh && bash brook-pf.sh
 }
 
-function menu(){
-    echo "###       node tool v1.3       ###"
-    echo "###  By Twitter@Linux_Terminal ###"
-    echo "###    Update: 2020-03-17      ###"
-    echo ""
+function dd(){
+    echo -e "\033[41;33m 请选择需要安装的操作系统 \033[0m"
+    echo -e "\033[42;37m [1] \033[0m Debian"
+    echo -e "\033[42;37m [2] \033[0m Ubuntu"
+    echo -e "\033[42;37m [3] \033[0m Cent OS"
+    echo -e "\033[37m 请选择 \033[0m"
+    os=null
+    read opt
+    if [ "$opt"x = "1"x ]; then
+        $os=d
+    
+    elif [ "$opt"x = "2"x ]; then
+        $os=u
+    
+    elif [ "$opt"x = "3"x ]; then
+        $os=c
+    
+     else
+        echo -e "\033[41;33m 输入错误 \033[0m"
+        bash ./node.sh
 
+    fi
+    echo " "
+
+    echo " "
+    echo -e "\033[41;33m 输入发行版本 \033[0m"
+    echo -e "\033[37m 例如：Debian [9] Cent OS [7] \033[0m"
+    read v
+    echo " "
+
+    echo " "
+    echo -e "\033[41;33m 镜像类型 \033[0m"
+    echo -e "\033[42;37m [1] \033[0m 32位"
+    echo -e "\033[42;37m [2] \033[0m 64位"
+    opt=0
+    if [ "$opt"x = "1"x ]; then
+        $type=32
+    
+    elif [ "$opt"x = "2"x ]; then
+        $type=64
+    else
+        echo -e "\033[41;33m 输入错误 \033[0m"
+        bash ./node.sh
+    fi
+    echo " "
+
+    echo " "
+    echo -e "\033[41;33m 请输入root密码 \033[0m"
+    read password
+    echo " "
+
+    echo " "
+    echo "---------------------------------------------------------------------------"
+    echo -e "\033[41;33m 请确认下列信息无误，任何失误需要重置操作系统！\033[0m"
+    echo -e "\033[42;37m 操作系统 \033[0m $os"
+    echo -e "\033[42;37m 发行版本 \033[0m $v"
+    echo -e "\033[42;37m 镜像类型 \033[0m $password"
+    echo -e "\033[42;37m root密码 \033[0m $password"
+    echo " "
+    echo -e "\033[41;33m 回车以继续，ctrl+C退出 \033[0m"
+    echo " "
+    echo "---------------------------------------------------------------------------"
+    read -n 1
+    echo " "
+    echo  -e "\033[37m 开始安装，请静候10min！ \033[0m"
+
+    bash <(wget --no-check-certificate -qO- 'https://moeclub.org/attachment/LinuxShell/InstallNET.sh') -$os $v -v $type -a -p $password
+}
+
+function dns(){
+    echo -e "\033[41;33m 请选择需要安装的内容 \033[0m"
+    echo -e "\033[42;37m [1] \033[0m 配置Dnsmasq"
+    echo -e "\033[42;37m [2] \033[0m 配置DNS"
+    echo -e "\033[37m 请选择 \033[0m"
+    echo " "
+    read opt
+
+    if [ "$opt"x = "1"x ]; then
+    echo "\033[42;37m [1] \033[0m 安装Dnsmasq"
+    echo "\033[42;37m [2] \033[0m 卸载Dnsmasq"
+    read opt
+
+        if [ "$opt"x = "1"x ]; then
+            wget --no-check-certificate -O dnsmasq_sniproxy.sh https://github.com/myxuchangbin/dnsmasq_sniproxy_install/raw/master/dnsmasq_sniproxy.sh && bash dnsmasq_sniproxy.sh -i
+        elif [ "$opt"x = "2"x ]; then
+            wget --no-check-certificate -O dnsmasq_sniproxy.sh https://github.com/myxuchangbin/dnsmasq_sniproxy_install/raw/master/dnsmasq_sniproxy.sh && bash dnsmasq_sniproxy.sh -u
+        else
+            echo -e "\033[41;33m 输入错误 \033[0m"
+            bash ./node.sh
+        fi
+    elif [ "$opt"x = "2"x ]; then
+        echo -e "\033[41;33m 输入DNS服务器IP \033[0m"
+        read unlock_ip
+        chattr -i /etc/resolv.conf && echo -e "nameserver $unlock_ip" > /etc/resolv.conf && chattr +i /etc/resolv.conf && systemd-resolve --flush-caches
+        echo "---------------------------------------------------------------------------"
+        echo -e "\033[41;33m 请确认下列信息无误，任何失误需要重置操作系统！\033[0m"
+        echo " "
+        echo -e "\033[42;37m DNS服务器IP \033[0m $unlock_ip"
+        echo -e "\033[41;33m 回车以继续，ctrl+C退出 \033[0m"
+        echo " "
+        echo "---------------------------------------------------------------------------"
+        
+        echo " "
+        read -n 1
+
+        echo " "
+        echo -e "\033[41;33m 配置成功，需要重启服务器，是否继续？(Y/n) \033[0m"
+        read opt
+            if [ "$opt"x = "Y"x ]; then
+                reboot
+            else
+                bash ./node.sh
+            fi
+    fi
+}
+
+function menu(){
+    echo "###       node tool v2.0       ###"
+    echo "###  By Twitter@Linux_Terminal ###"
+    echo "###    Update: 2020-03-18      ###"
+    echo ""
+    echo -e "\033[41;33m 适用环境 Debian/Ubuntu \033[0m"
     echo "---------------------------------------------------------------------------"
 
     echo -e "\033[42;37m [1] \033[0m 安装docker版SSR后端"
     echo -e "\033[42;37m [2] \033[0m 安装v2ray后端"
     echo -e "\033[42;37m [3] \033[0m 安装brook中转后端"
     echo -e "\033[42;37m [4] \033[0m 安装bbr加速"
+    echo -e "\033[42;37m [5] \033[0m 一键重装纯净系统"
+    echo -e "\033[42;37m [6] \033[0m 一键配置DNS解锁"
     echo -e "\033[41;33m 请输入选项以继续，ctrl+C退出 \033[0m"
 
     opt=0
@@ -188,6 +306,12 @@ function menu(){
     
     elif [ "$opt"x = "4"x ]; then
         bbr
+    
+    elif [ "$opt"x = "5"x ]; then
+        dd
+
+    elif [ "$opt"x = "6"x ]; then
+    
     else
         echo -e "\033[41;33m 输入错误 \033[0m"
         bash ./node.sh
