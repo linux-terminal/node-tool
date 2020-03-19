@@ -170,13 +170,13 @@ function dd(){
     os=null
     read opt
     if [ "$opt"x = "1"x ]; then
-        $os=d
+        os=d
     
     elif [ "$opt"x = "2"x ]; then
-        $os=u
+        os=u
     
     elif [ "$opt"x = "3"x ]; then
-        $os=c
+        os=c
     
      else
         echo -e "\033[41;33m 输入错误 \033[0m"
@@ -197,10 +197,10 @@ function dd(){
     echo -e "\033[42;37m [2] \033[0m 64位"
     opt=0
     if [ "$opt"x = "1"x ]; then
-        $type=32
+        type=32
     
     elif [ "$opt"x = "2"x ]; then
-        $type=64
+        type=64
     else
         echo -e "\033[41;33m 输入错误 \033[0m"
         bash ./node.sh
@@ -278,7 +278,7 @@ function dns(){
 }
 
 function menu(){
-    echo "###       node tool v2.0       ###"
+    echo "###       node tool v2.1       ###"
     echo "###  By Twitter@Linux_Terminal ###"
     echo "###    Update: 2020-03-18      ###"
     echo ""
