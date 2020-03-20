@@ -305,7 +305,7 @@ function donate (){
 }
 
 function menu(){
-    echo "###       node tool v2.1       ###"
+    echo "###       node tool v2.4       ###"
     echo "###  By Twitter@Linux_Terminal ###"
     echo "###    Update: 2020-03-18      ###"
     echo ""
