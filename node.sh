@@ -2,6 +2,12 @@
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/bin:/sbin
 export PATH
 
+which yum >/dev/null 2>/dev/null
+if [ $? -ne 0 ]; then
+    Main=apt-get
+else
+    Main=yum
+fi
 
 function ssr(){
     echo -e "\033[42;37m 正在检测docker运行状态 \033[0m"
@@ -277,12 +283,33 @@ function dns(){
     fi
 }
 
+function donate (){
+    $Main install qrencode -y
+    echo -e "\033[42;37m [1] \033[0m 支付宝"
+    echo -e "\033[42;37m [2] \033[0m 微信"
+    echo " "
+    read opt
+    
+    if [ "$opt"x = "1"x ]; then
+        qrencode -l M -t UTF8 -k https://qr.alipay.com/fkx15280wdabfli9wnmdp1c
+
+    elif [ "$opt"x = "2"x ]; then
+        qrencode -l M -t UTF8 -k wxp://f2f1VUKyDPTr-BCsZHsqHsSBlbxI32o1zway
+    
+    else
+        echo -e "\033[41;33m 输入错误 \033[0m"
+        bash ./node.sh
+    fi
+
+    echo -e "\033[41;33m 感谢您的支持 \033[0m"
+}
+
 function menu(){
     echo "###       node tool v2.1       ###"
     echo "###  By Twitter@Linux_Terminal ###"
     echo "###    Update: 2020-03-18      ###"
     echo ""
-    echo -e "\033[41;33m 适用环境 Debian/Ubuntu \033[0m"
+    echo -e "\033[41;33m 适用环境 Debian/Ubuntu/Cent OS \033[0m"
     echo "---------------------------------------------------------------------------"
 
     echo -e "\033[42;37m [1] \033[0m 安装docker版SSR后端"
@@ -291,6 +318,7 @@ function menu(){
     echo -e "\033[42;37m [4] \033[0m 安装bbr加速"
     echo -e "\033[42;37m [5] \033[0m 一键重装纯净系统"
     echo -e "\033[42;37m [6] \033[0m 一键配置DNS解锁"
+    echo -e "\033[42;37m [0] \033[0m 捐赠开发者"
     echo -e "\033[41;33m 请输入选项以继续，ctrl+C退出 \033[0m"
 
     opt=0
@@ -313,6 +341,9 @@ function menu(){
     elif [ "$opt"x = "6"x ]; then
         dns
         
+        elif [ "$opt"x = "0"x ]; then
+        donate
+    
     else
         echo -e "\033[41;33m 输入错误 \033[0m"
         bash ./node.sh
