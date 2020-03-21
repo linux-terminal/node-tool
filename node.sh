@@ -202,6 +202,8 @@ function dd(){
     echo -e "\033[42;37m [1] \033[0m 32位"
     echo -e "\033[42;37m [2] \033[0m 64位"
     opt=0
+    read opt
+    
     if [ "$opt"x = "1"x ]; then
         type=32
     
