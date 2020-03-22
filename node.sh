@@ -225,7 +225,7 @@ function dd(){
     echo -e "\033[41;33m 请确认下列信息无误，任何失误需要重置操作系统！\033[0m"
     echo -e "\033[42;37m 操作系统 \033[0m $os"
     echo -e "\033[42;37m 发行版本 \033[0m $v"
-    echo -e "\033[42;37m 镜像类型 \033[0m $password"
+    echo -e "\033[42;37m 镜像类型 \033[0m $type"
     echo -e "\033[42;37m root密码 \033[0m $password"
     echo " "
     echo -e "\033[41;33m 回车以继续，ctrl+C退出 \033[0m"
