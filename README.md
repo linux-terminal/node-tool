@@ -14,6 +14,7 @@ wget https://raw.githubusercontent.com/linux-terminal/node-tool/master/node.sh &
 - 一键安装BBR加速
 - 一键重装系统
 - 一键配置DNS解锁
+- 一键设置swap
 
 ### 作者
 Twitter@Linux_Terminal
