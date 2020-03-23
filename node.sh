@@ -203,7 +203,6 @@ function dd(){
     echo -e "\033[42;37m [2] \033[0m 64位"
     opt=0
     read opt
-    
     if [ "$opt"x = "1"x ]; then
         type=32
     
@@ -225,7 +224,7 @@ function dd(){
     echo -e "\033[41;33m 请确认下列信息无误，任何失误需要重置操作系统！\033[0m"
     echo -e "\033[42;37m 操作系统 \033[0m $os"
     echo -e "\033[42;37m 发行版本 \033[0m $v"
-    echo -e "\033[42;37m 镜像类型 \033[0m $type"
+    echo -e "\033[42;37m 镜像类型 \033[0m $password"
     echo -e "\033[42;37m root密码 \033[0m $password"
     echo " "
     echo -e "\033[41;33m 回车以继续，ctrl+C退出 \033[0m"
@@ -306,8 +305,12 @@ function donate (){
     echo -e "\033[41;33m 感谢您的支持 \033[0m"
 }
 
+function swap(){
+    wget https://www.moerats.com/usr/shell/swap.sh && bash swap.sh
+}
+
 function menu(){
-    echo "###       node tool v2.4       ###"
+    echo "###       node tool v2.5       ###"
     echo "###  By Twitter@Linux_Terminal ###"
     echo "###    Update: 2020-03-18      ###"
     echo ""
@@ -320,6 +323,7 @@ function menu(){
     echo -e "\033[42;37m [4] \033[0m 安装bbr加速"
     echo -e "\033[42;37m [5] \033[0m 一键重装纯净系统"
     echo -e "\033[42;37m [6] \033[0m 一键配置DNS解锁"
+    echo -e "\033[42;37m [7] \033[0m 一键设置swap"
     echo -e "\033[42;37m [0] \033[0m 捐赠开发者"
     echo -e "\033[41;33m 请输入选项以继续，ctrl+C退出 \033[0m"
 
@@ -342,8 +346,11 @@ function menu(){
 
     elif [ "$opt"x = "6"x ]; then
         dns
+
+    elif [ "$opt"x = "7"x ]; then
+        swap
         
-        elif [ "$opt"x = "0"x ]; then
+    elif [ "$opt"x = "0"x ]; then
         donate
     
     else
