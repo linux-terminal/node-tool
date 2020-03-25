@@ -3,7 +3,7 @@
 
 ### 使用方法
 ```shell
-wget https://raw.githubusercontent.com/linux-terminal/node-tool/master/node.sh && bash node.sh
+wget -N --no-check-certificate "https://raw.githubusercontent.com/linux-terminal/node-tool/master/node.sh" && bash node.sh
 ```
 
 ### 功能说明
