@@ -9,7 +9,7 @@ wget -N --no-check-certificate "https://raw.githubusercontent.com/linux-terminal
 ### 功能说明
 - 一键安装docker版ssr
 - 一键安装docker版偏移端口ssr
-- 一键安装v2ray免费版
+- 一键安装v2ray后端
 - 一键安装brook中转
 - 一键安装BBR加速
 - 一键重装系统
