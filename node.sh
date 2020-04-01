@@ -143,7 +143,6 @@ function v2ray_opt(){
         bash ./node.sh
     fi
 }
-}
 
 function v2ray(){
     echo "###   v2ray后端一键对接脚本v1.0   ###"
