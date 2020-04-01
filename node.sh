@@ -16,7 +16,7 @@ function ssr(){
 
     echo -e "\033[42;37m 选择SSR安装版本 \033[0m"
     echo -e "\033[37m [1] docker版SSR普通版 \033[0m"
-    echo -e "\033[37m [2]docker版SSR后端端口偏移版 \033[0m"
+    echo -e "\033[37m [2] docker版SSR后端端口偏移版 \033[0m"
     echo -e "\033[41;33m 输入1或2进行选择: \033[0m"
     opt=0
     read opt
@@ -24,7 +24,13 @@ function ssr(){
     echo "---------------------------------------------------------------------------"
 
 
-    if [ "$opt"x = "1"x ]; then        
+    if [ "$opt"x = "1"x ]; then
+
+        echo " "
+        echo -e "\033[42;37m 请输入docker容器名 \033[0m 参考格式 ssrmu"
+        read name
+        echo " "
+
         echo " "
         echo -e "\033[42;37m 请输入对接域名 \033[0m 参考格式 http://sspanel.com"
         read host_1
@@ -43,7 +49,7 @@ function ssr(){
         echo " "
         echo "---------------------------------------------------------------------------"
         echo -e "\033[41;33m 请确认下列信息无误 \033[0m"
-        echo -e "\033[41;33m docker容器名 \033[0m ssrmu"
+        echo -e "\033[41;33m docker容器名 \033[0m $name"
         echo -e "\033[42;37m 对接域名 \033[0m $host_1"
         echo -e "\033[42;37m muKey \033[0m $muKey_1"
         echo -e "\033[42;37m 节点ID \033[0m $nodeid_1"
@@ -59,6 +65,12 @@ function ssr(){
 
 
     elif [ "$opt"x = "2"x ]; then
+
+        echo " "
+        echo -e "\033[42;37m 请输入docker容器名 \033[0m 参考格式 ssrmu"
+        read name
+        echo " "
+
         echo " "
         echo -e "\033[42;37m 请输入对接域名 \033[0m 参考格式 http://sspanel.com"
         read host_2
@@ -87,7 +99,7 @@ function ssr(){
         echo " "
         echo "---------------------------------------------------------------------------"
         echo -e "\033[41;33m 请确认下列信息无误 \033[0m"
-        echo -e "\033[41;33m docker容器名 \033[0m ssrmuv2"
+        echo -e "\033[41;33m docker容器名 \033[0m $name"
         echo -e "\033[42;37m 对接域名 \033[0m $host_2"
         echo -e "\033[42;37m muKey \033[0m $muKey_2"
         echo -e "\033[42;37m 节点ID \033[0m $nodeid_2"
@@ -108,6 +120,29 @@ function ssr(){
         bash ./node.sh
 
         fi
+}
+
+function v2ray_opt(){
+    echo -e "\033[42;37m 选择v2ray安装版本 \033[0m"
+    echo -e "\033[37m [1] bash版v2ray \033[0m"
+    echo -e "\033[37m [2] rico授权版v2ray \033[0m"
+    echo -e "\033[41;33m 输入1或2进行选择: \033[0m"
+
+    read opt
+    echo " "
+    echo "---------------------------------------------------------------------------"
+
+    if [ "$opt"x = "1"x ]; then
+    v2ray
+
+    elif [ "$opt"x = "2"x ]; then
+    v2rico
+
+    else
+        echo -e "\033[41;33m 输入错误 \033[0m"
+        bash ./node.sh
+    fi
+}
 }
 
 function v2ray(){
@@ -159,9 +194,71 @@ function v2ray(){
     echo -e "\033[42;37m 安装完成 \033[0m"
 }
 
-function bbr(){
-    wget -N --no-check-certificate "https://github.com/ylx2016/Linux-NetSpeed/releases/download/sh/tcp.sh" && chmod +x tcp.sh && bash tcp.sh
+function v2rico(){
+    echo -e "\033[42;37m 正在检测docker运行状态 \033[0m"
+    docker version > /dev/null || curl -fsSL get.docker.com | bash
+    service docker restart
+
+    echo "###   v2ray rico授权版一键安装   ###"
+    echo "###     By Linux_Terminal       ###"
+    echo "###     Update: 2020-04-01      ###"
+    echo " "
+    echo -e "\033[41;33m 请先获取rico授权 \033[0m"
+    echo -e "\033[41;33m 授权链接\033[0m https://t.me/Rico_V2_bot"
+    echo " "
+    echo "---------------------------------------------------------------------------"
+    echo " "
+
+    echo " "
+    echo -e "\033[42;37m 请输入docker容器名 \033[0m 参考格式 v2ray"
+    read name
+    echo " "
+
+    echo " "
+    echo -e "\033[42;37m 请输入对接域名 \033[0m 参考格式 http://sspanel.com"
+    read host
+    echo " "
+
+    echo " "
+    echo -e "\033[42;37m 请输入muKey \033[0m 参考格式 sspanel"
+    read muKey
+    echo " "
+
+    echo " "
+    echo -e "\033[42;37m 请输入节点ID \033[0m 参考格式 42"
+    read nodeid
+    echo " "
+
+    echo " "
+    echo "---------------------------------------------------------------------------"
+    echo -e "\033[41;33m 请确认下列信息无误 \033[0m"
+    echo -e "\033[41;33m docker容器名 \033[0m $name"
+    echo -e "\033[42;37m 对接域名 \033[0m $host"
+    echo -e "\033[42;37m muKey \033[0m $muKey"
+    echo -e "\033[42;37m 节点ID \033[0m $nodeid"
+    echo " "
+    echo -e "\033[41;33m 回车以继续，ctrl+C退出 \033[0m"
+    echo " "
+    echo "---------------------------------------------------------------------------"
+
+    read -n 1
+        docker run -d --name=$name \
+    -e speedtest=0  -e api_port=2333 -e usemysql=0 -e downWithPanel=0 \
+    -e node_id=$nodeid -e sspanel_url=$host -e key=$muKey \
+    --log-opt max-size=10m --log-opt max-file=5 \
+    --network=host --restart=always \
+    a3v8meq8wcqn2twa/a3v8meq:4.22.1.8
+
+    echo " "
+    echo " "
+    echo -e "\033[42;37m 安装完成 \033[0m"
+
 }
+
+function bbr(){
+    wget --no-check-certificate -O tcp.sh https://github.com/cx9208/Linux-NetSpeed/raw/master/tcp.sh && chmod +x tcp.sh && ./tcp.sh
+}
+
 function brook(){
     wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubiBackup/doubi/master/brook-pf.sh && chmod +x brook-pf.sh && bash brook-pf.sh
 }
@@ -223,7 +320,7 @@ function dd(){
     echo -e "\033[41;33m 请确认下列信息无误，任何失误需要重置操作系统！\033[0m"
     echo -e "\033[42;37m 操作系统 \033[0m $os"
     echo -e "\033[42;37m 发行版本 \033[0m $v"
-    echo -e "\033[42;37m 镜像类型 \033[0m $password"
+    echo -e "\033[42;37m 镜像类型 \033[0m $type 位"
     echo -e "\033[42;37m root密码 \033[0m $password"
     echo " "
     echo -e "\033[41;33m 回车以继续，ctrl+C退出 \033[0m"
@@ -309,9 +406,9 @@ function swap(){
 }
 
 function menu(){
-    echo "###       node tool v2.5       ###"
+    echo "###       node tool v3.0       ###"
     echo "###  By Twitter@Linux_Terminal ###"
-    echo "###    Update: 2020-03-18      ###"
+    echo "###    Update: 2020-04-01      ###"
     echo ""
     echo -e "\033[41;33m 适用环境 Debian/Ubuntu/Cent OS \033[0m"
     echo "---------------------------------------------------------------------------"
@@ -332,7 +429,7 @@ function menu(){
         ssr
 
     elif [ "$opt"x = "2"x ]; then
-        v2ray
+        v2ray_opt
 
     elif [ "$opt"x = "3"x ]; then
         brook
