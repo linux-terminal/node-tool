@@ -184,7 +184,7 @@ function v2ray(){
     read -n 1
     apt-get update -y
     apt-get install curl -y
-    bash <(curl -L -s  https://raw.githubusercontent.com/linux-terminal/v2ray-sspanel-v3-mod_Uim-plugin/master/install-release.sh) \
+    bash <(curl -L -s  https://raw.githubusercontent.com/linux-terminal/v2ray-sspanel-v3-mod_Uim-plugin-1/master/install-release.sh) \
     --panelurl $host --panelkey $muKey --nodeid $nodeid \
     --downwithpanel 1 --speedtestrate 6 --paneltype 0 --usemysql 0
     systemctl start v2ray.service
