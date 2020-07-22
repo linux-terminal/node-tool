@@ -17,6 +17,6 @@ wget -N --no-check-certificate "https://raw.githubusercontent.com/linux-terminal
 - 一键设置swap
 
 ### 作者
-Twitter@Linux_Terminal
+GitHub@linux-terminal
 
 **觉得好用请star!**
